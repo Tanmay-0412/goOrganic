@@ -16,7 +16,7 @@ function AboutContent() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center mb-16">
                     <div>
                         <h1 className="text-4xl lg:text-5xl font-bold text-slate-800 mb-6">
-                            About <span className="text-green-600">goOrganic</span>
+                            About <span className="text-green-600">TerraVerda</span>
                         </h1>
                         <p className="text-lg text-slate-600 mb-4 leading-relaxed">
                             We bridge the gap between urban and rural communities by connecting city dwellers with farmers and rural gardeners. Our mission is to promote sustainable gardening and organic farming practices accessible to everyone, regardless of location.
@@ -169,7 +169,7 @@ function AboutContent() {
 
                 {/* Why Choose Us */}
                 <div className="mb-16 bg-slate-50 p-10 rounded-lg">
-                    <h2 className="text-3xl font-bold text-slate-800 mb-8">Why Choose goOrganic?</h2>
+                    <h2 className="text-3xl font-bold text-slate-800 mb-8">Why Choose TerraVerda?</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <div className="flex gap-4">
                             <Leaf className="w-6 h-6 text-green-600 flex-shrink-0 mt-1" />
