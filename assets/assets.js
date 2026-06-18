@@ -25,12 +25,13 @@ import profile_pic1 from "./profile_pic1.jpg"
 import profile_pic2 from "./profile_pic2.jpg"
 import profile_pic3 from "./profile_pic3.jpg"
 import arrow_icon from "./arrow_icon.svg";
+import favicon from "./favicon.jpeg"
 
 export const assets = {
     upload_area, hero_model_img,
     hero_product_img1, hero_product_img2, gs_logo,
     product_img1, product_img2, product_img3, product_img4, product_img5, product_img6,
-    product_img7, product_img8, product_img9, product_img10, product_img11, product_img12,product_img13, product_img14, product_img15, product_img16, arrow_icon
+    product_img7, product_img8, product_img9, product_img10, product_img11, product_img12,product_img13, product_img14, product_img15, product_img16, arrow_icon, favicon
 }
 
 export const categories = ["Soil", "Seeds", "Plants", "Fertilizers", "Agri Products", "Gardening"];

@@ -2,12 +2,13 @@ import { Outfit } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import StoreProvider from "@/app/StoreProvider";
 import "./globals.css";
+import { assets } from "@/assets/assets";
 
 const outfit = Outfit({ subsets: ["latin"], weight: ["400", "500", "600"] });
 
 export const metadata = {
-    title: "TerraVerda. - New Dream",
-    description: "TerraVerda. - New Dream",
+    title: "TerraVerda - New Dream",
+    description: "TerraVerda - New Dream",
 };
 
 export default function RootLayout({ children }) {

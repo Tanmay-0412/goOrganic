@@ -4,12 +4,14 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import AuthModal from "./AuthModal";
 
 const Navbar = () => {
 
     const router = useRouter();
 
     const [search, setSearch] = useState('')
+    const [showAuthModal, setShowAuthModal] = useState(false)
     const cartCount = useSelector(state => state.cart.total)
 
     const handleSearch = (e) => {
@@ -18,6 +20,7 @@ const Navbar = () => {
     }
 
     return (
+        <>
         <nav className="relative bg-white">
             <div className="mx-6">
                 <div className="flex items-center justify-between max-w-7xl mx-auto py-4  transition-all">
@@ -49,14 +52,16 @@ const Navbar = () => {
                             <button className="absolute -top-1 left-3 text-[8px] text-white bg-slate-600 size-3.5 rounded-full">{cartCount}</button>
                         </Link>
 
-                        <button className="px-8 py-2 bg-indigo-500 hover:bg-indigo-600 transition text-white rounded-full">
+                        <button className="px-8 py-2 bg-indigo-500 hover:bg-indigo-600 transition text-white rounded-full"
+                            onClick={()=> setShowAuthModal(true)}>
                             Login
                         </button>
 
                     </div>
 
                     {/* Mobile User Button  */}
-                    <div className="sm:hidden">
+                    <div className="sm:hidden"
+                     onClick={() => router.push('/login')}>
                         <button className="px-7 py-1.5 bg-indigo-500 hover:bg-indigo-600 text-sm transition text-white rounded-full">
                             Login
                         </button>
@@ -65,6 +70,8 @@ const Navbar = () => {
             </div>
             <hr className="border-gray-300" />
         </nav>
+        <AuthModal isOpen={showAuthModal} onClose={()=> setShowAuthModal(false)} />
+        </>
     )
 }
 

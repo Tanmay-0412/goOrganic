@@ -3,7 +3,8 @@ import { Suspense } from 'react'
 import Image from 'next/image'
 import ProductCard from '@/components/ProductCard'
 import { useSelector } from 'react-redux'
-import { Users, Leaf, Target, Award, TrendingUp, MapPin } from 'lucide-react'
+import { Users, Leaf, Target, Award, TrendingUp, MapPin, UserCircle, UserCircle2, BookOpen, Globe } from 'lucide-react'
+import { assets } from '@/assets/assets'
 
 function AboutContent() {
     const products = useSelector(state => state.product.list)
@@ -75,6 +76,57 @@ function AboutContent() {
                             <p className="text-slate-600">Committed to environmental responsibility and promoting practices that benefit both people and planet.</p>
                         </div>
                     </div>
+                </div>
+
+                <div className="mb-16 bg-gradient-to-r from-green-50 to-slate-50 p-10 rounded-lg">
+                <h2 className="text-3xl font-bold text-slate-800 mb-8 flex items-center gap-2">
+                    <Leaf className="w-8 h-8 text-green-600" />
+                    Meet Our Organic Farming Specialist
+                </h2>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {/* Specialist Card */}
+                    <div className="group bg-white shadow-lg rounded-xl overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+                    <img 
+                        src="http://kvksindhudurg.com/wp-content/uploads/2024/06/vys-150x150.jpg"
+                        alt="Organic Farming Specialist" 
+                        className="w-full h-80 object-cover group-hover:opacity-90 transition duration-300"
+                    />
+                    <div className="p-6 text-center">
+                        <h3 className="text-xl font-bold text-slate-800 mb-2">Dr. Vilas Yashwant Sawant</h3>
+                        <p className="text-slate-600 mb-4">Subject Matter Specialist</p>
+                        <p className="text-slate-600 mb-4">Discipline: Extension Education</p>
+                        <div className="flex justify-center gap-4">
+                        <span className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium group-hover:bg-green-200 transition">
+                            15+ Years Experience
+                        </span>
+                        <span className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium group-hover:bg-green-200 transition">
+                            Global Recognition
+                        </span>
+                        </div>
+                    </div>
+                    </div>
+                    <div className="group bg-white shadow-lg rounded-xl overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+                    <img 
+                        src="http://kvksindhudurg.com/wp-content/uploads/2024/06/vys-150x150.jpg"
+                        alt="Organic Farming Specialist" 
+                        className="w-full h-80 object-cover group-hover:opacity-90 transition duration-300"
+                    />
+                    <div className="p-6 text-center">
+                        <h3 className="text-xl font-bold text-slate-800 mb-2">Dr. Vilas Yashwant Sawant</h3>
+                        <p className="text-slate-600 mb-4">Subject Matter Specialist</p>
+                        <p className="text-slate-600 mb-4">Discipline: Extension Education</p>
+                        <div className="flex justify-center gap-4">
+                        <span className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium group-hover:bg-green-200 transition">
+                            15+ Years Experience
+                        </span>
+                        <span className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium group-hover:bg-green-200 transition">
+                            Global Recognition
+                        </span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
                 </div>
 
                 {/* Experience & Achievements */}
