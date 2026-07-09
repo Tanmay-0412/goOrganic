@@ -1,25 +1,28 @@
 import { Outfit } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import StoreProvider from "@/app/StoreProvider";
+import { AppContextProvider } from "@/context/AppContext";
 import "./globals.css";
 import { assets } from "@/assets/assets";
 
 const outfit = Outfit({ subsets: ["latin"], weight: ["400", "500", "600"] });
 
 export const metadata = {
-    title: "RootVerda - New Dream",
-    description: "RootVerda - New Dream",
+  title: "RootVerda - New Dream",
+  description: "RootVerda - New Dream",
 };
 
 export default function RootLayout({ children }) {
-    return (
-        <html lang="en">
-            <body className={`${outfit.className} antialiased`}>
-                <StoreProvider>
-                    <Toaster />
-                    {children}
-                </StoreProvider>
-            </body>
-        </html>
-    );
+  return (
+    <html lang="en">
+      <body className={`${outfit.className} antialiased`}>
+        <StoreProvider>
+          <AppContextProvider>
+            <Toaster />
+            {children}
+          </AppContextProvider>
+        </StoreProvider>
+      </body>
+    </html>
+  );
 }
