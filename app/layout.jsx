@@ -7,8 +7,8 @@ import { assets } from "@/assets/assets";
 const outfit = Outfit({ subsets: ["latin"], weight: ["400", "500", "600"] });
 
 export const metadata = {
-    title: "TerraVerda - New Dream",
-    description: "TerraVerda - New Dream",
+    title: "RootVerda - New Dream",
+    description: "RootVerda - New Dream",
 };
 
 export default function RootLayout({ children }) {

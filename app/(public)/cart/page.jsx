@@ -38,7 +38,7 @@ export default function Cart() {
 
     const handleDeleteItemFromCart = (productId) => {
         dispatch(deleteItemFromCart({ productId }))
-    }
+    }    
 
     useEffect(() => {
         if (products.length > 0) {

@@ -22,7 +22,7 @@ const HeaderSlider = () => {
     },
     {
       id: 3,
-      title: "Innovation Meets Agriculture - TerraVerda is Here for you!",
+      title: "Innovation Meets Agriculture - RootVerda is Here for you!",
       offer: "Exclusive Deal 40% Off",
       buttonText1: "Order Now",
       buttonText2: "Learn More",

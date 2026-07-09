@@ -1,5 +1,5 @@
 import { PlusIcon, SquarePenIcon, XIcon } from 'lucide-react';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AddressModal from './AddressModal';
 import { useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
@@ -26,9 +26,89 @@ const OrderSummary = ({ totalPrice, items }) => {
 
     const handlePlaceOrder = async (e) => {
         e.preventDefault();
-
-        router.push('/orders')
+        onPayment(coupon ? (totalPrice - (coupon.discount / 100 * totalPrice)).toFixed(2) : totalPrice.toLocaleString());
+        // pass the amount with function 
+        // router.push('/orders')
     }
+
+    const loadScript = (src)=>{
+        return new Promise((resolve) => {
+            const script = document.createElement('script');
+            script.src = src;
+            script.onload = () => {
+                resolve(true);
+            }
+            script.onerror = () => {
+                resolve(false);
+            }   
+            document.body.appendChild(script);
+        })
+    }
+
+    const onPayment = async (amount) => { 
+        // create order
+        try{
+            const options = {
+                productId :1,
+                amount: amount,
+            }
+            const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/payment/createOrder`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(options)
+            });
+            console.log(res)
+            const data = await res.json();
+            console.log(data)
+            if(!res.ok){
+                throw new Error(data.message || 'Something went wrong');
+            }
+            console.log(process.env.NEXT_PUBLIC_RAZORPAY_KEY)
+            const paymentObject = new window.Razorpay({
+                key : process.env.NEXT_PUBLIC_RAZORPAY_KEY,
+                // order_id : data.orderId,
+                order_id : data.id,
+                ...data,
+                handler: async function(response){
+                    console.log(response);
+                    
+                    const options2 = {
+                        order_id : response.razorpay_order_id,
+                        payment_id : response.razorpay_payment_id,
+                        signature : response.razorpay_signature,
+                    }
+
+                    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/payment/verifyPayment`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(options2)
+                    });
+                    const data = await res.json();
+                    if(!res.ok){
+                        throw new Error(data.message || 'Something went wrong');
+                    }
+
+                    if(res?.data?.status === 'success'){
+                    alert('Payment successful');
+                    }else{
+                    alert('Payment failed');
+                    }
+                }
+            })
+            paymentObject.open();
+
+        }catch(err){
+            console.log(err);
+        }
+    }
+    
+    useEffect(() => {
+        loadScript('https://checkout.razorpay.com/v1/checkout.js');
+    }, []);
 
     return (
         <div className='w-full max-w-lg lg:max-w-[340px] bg-slate-50/30 border border-slate-200 text-slate-500 text-sm rounded-xl p-7'>
@@ -101,7 +181,9 @@ const OrderSummary = ({ totalPrice, items }) => {
                 <p>Total:</p>
                 <p className='font-medium text-right'>{currency}{coupon ? (totalPrice - (coupon.discount / 100 * totalPrice)).toFixed(2) : totalPrice.toLocaleString()}</p>
             </div>
-            <button onClick={e => toast.promise(handlePlaceOrder(e), { loading: 'placing Order...' })} className='w-full bg-slate-700 text-white py-2.5 rounded hover:bg-slate-900 active:scale-95 transition-all'>Place Order</button>
+            <button onClick={e => toast.promise(handlePlaceOrder(e), { loading: 'placing Order...' })} 
+            className='w-full bg-slate-700 text-white py-2.5 rounded hover:bg-slate-900 active:scale-95 transition-all'>
+                Place Order</button>
 
             {showAddressModal && <AddressModal setShowAddressModal={setShowAddressModal} />}
 

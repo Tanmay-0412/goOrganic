@@ -1,4 +1,5 @@
 import { Leaf } from "lucide-react";
+import { useState } from "react";
 
 export default function LoginPage() {
   
@@ -15,6 +16,7 @@ export default function LoginPage() {
             <input
               type="email"
               placeholder="Enter your email"
+              onChange={(e)=> setEmailId(e.target.value) }
               className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none"
             />
           </div>
@@ -23,6 +25,7 @@ export default function LoginPage() {
             <input
               type="password"
               placeholder="Enter your password"
+              onChange={(e)=> setPassword(e.target.value) }
               className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none"
             />
           </div>

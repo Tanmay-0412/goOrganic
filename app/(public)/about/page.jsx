@@ -17,19 +17,22 @@ function AboutContent() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center mb-16">
                     <div>
                         <h1 className="text-4xl lg:text-5xl font-bold text-slate-800 mb-6">
-                            About <span className="text-green-600">TerraVerda</span>
+                            About <span className="text-green-600">RootVerda</span>
                         </h1>
                         <p className="text-lg text-slate-600 mb-4 leading-relaxed">
-                            We bridge the gap between urban and rural communities by connecting city dwellers with farmers and rural gardeners. Our mission is to promote sustainable gardening and organic farming practices accessible to everyone, regardless of location.
+                            RootVerda was established with a simple yet powerful belief — nature has already gifted humanity everything required to create healthy life, balanced ecosystems, and sustainable growth. Pure soil, clean air, abundant water, sunlight, natural minerals, and living energy together create the invisible foundation that supports every form of life around us. Yet in today’s rapidly changing world, both people and nature are slowly losing this balance.
                         </p>
+                        {/* <p className="text-lg text-slate-600 leading-relaxed">
+                            Customers spend money on products, but many still fail to understand why their plants remain weak, unhealthy, or unable to grow naturally.
+                        </p> */}
                         <p className="text-lg text-slate-600 leading-relaxed">
-                            Founded with a passion for organic living and community support, goOrganic empowers farmers in rural areas while helping urban gardeners cultivate their green spaces.
+                           This understanding gave birth to RootVerda.
                         </p>
                     </div>
                     <div className="bg-gradient-to-br from-green-100 to-green-50 rounded-lg p-8 flex items-center justify-center min-h-72">
                         <div className="text-center">
                             <Leaf className="w-24 h-24 text-green-600 mx-auto mb-4" />
-                            <p className="text-green-700 font-semibold text-xl">Growing Together</p>
+                            <p className="text-green-700 font-semibold text-xl">Science Behind Healthy Plants</p>
                         </div>
                     </div>
                 </div>
@@ -42,7 +45,7 @@ function AboutContent() {
                             Our Mission
                         </h3>
                         <p className="text-slate-600 leading-relaxed">
-                            To promote sustainable organic farming and gardening by connecting rural farmers with urban enthusiasts, providing quality products, knowledge, and tools that make gardening accessible and rewarding for everyone.
+                            At RootVerda, we recognized a deeper reality. Despite thousands of agricultural and plant-care products available in the market, people continue struggling to keep their plants healthy. Farmers continue working hard but often do not receive the true value of their natural resources. Customers spend money on products, but many still fail to understand why their plants remain weak, unhealthy, or unable to grow naturally.
                         </p>
                     </div>
                     <div className="bg-slate-50 p-8 rounded-lg">
@@ -51,7 +54,7 @@ function AboutContent() {
                             Our Vision
                         </h3>
                         <p className="text-slate-600 leading-relaxed">
-                            A world where every household, whether urban or rural, can grow their own food organically. We envision a thriving community that values sustainability, supports local farmers, and celebrates the joy of gardening.
+                            We are not a company created merely to sell soil, compost, or agricultural products. We are building a long-term ecosystem where science, nature, people, and farming communities work together in complete balance. We believe plants are not decorative objects sitting quietly in balconies or gardens. Plants carry living energy. They improve emotional well-being, purify the air we breathe, create peace within homes, and silently contribute toward healthier lives.
                         </p>
                     </div>
                 </div>
@@ -182,7 +185,7 @@ function AboutContent() {
                             <div className="bg-green-600 text-white rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0 font-bold">2</div>
                             <div>
                                 <h4 className="text-xl font-semibold text-slate-800 mb-2">Urban Gardening Initiatives</h4>
-                                <p className="text-slate-600">Launched successful urban gardening campaigns promoting terrace gardens, balcony gardens, and container gardening in metropolitan areas.</p>
+                                <p className="text-slate-600">Launched successful urban gardening campaigns promoting Rootce gardens, balcony gardens, and container gardening in metropolitan areas.</p>
                             </div>
                         </div>
                         <div className="flex gap-6 items-start">
@@ -221,7 +224,7 @@ function AboutContent() {
 
                 {/* Why Choose Us */}
                 <div className="mb-16 bg-slate-50 p-10 rounded-lg">
-                    <h2 className="text-3xl font-bold text-slate-800 mb-8">Why Choose TerraVerda?</h2>
+                    <h2 className="text-3xl font-bold text-slate-800 mb-8">Why Choose RootVerda?</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <div className="flex gap-4">
                             <Leaf className="w-6 h-6 text-green-600 flex-shrink-0 mt-1" />

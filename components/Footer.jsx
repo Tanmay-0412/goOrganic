@@ -53,7 +53,7 @@ const Footer = () => {
                 <div className="flex flex-col md:flex-row items-start justify-between gap-10 py-10 border-b border-slate-500/30 text-slate-500">
                     <div>
                         <Link href="/" className="text-4xl font-semibold text-slate-700">
-                            <span className="text-green-600">Terra</span>
+                            <span className="text-green-600">Root</span>
                             <span className="text-amber-700">Verda</span>
                             <span className="text-green-600 text-5xl leading-0">.</span>
                         </Link>
