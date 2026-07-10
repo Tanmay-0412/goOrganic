@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 const OrderSummary = ({ totalPrice, items }) => {
 
     const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || '$';
+    console.log(currency)
 
     const router = useRouter();
 
@@ -47,6 +48,7 @@ const OrderSummary = ({ totalPrice, items }) => {
 
     const onPayment = async (amount) => { 
         // create order
+        console.log(process.env.NEXT_PUBLIC_BASE_URL)
         try{
             const options = {
                 productId :1,
