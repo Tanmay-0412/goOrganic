@@ -3,9 +3,10 @@ import { Search, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AuthModal from "./AuthModal";
 import { logout } from "@/lib/features/auth/authSlice";
+import { showSuccess, showError, showWarning } from "@/lib/toast";
 
 const Navbar = () => {
 
@@ -19,6 +20,33 @@ const Navbar = () => {
     const handleSearch = (e) => {
         e.preventDefault()
         router.push(`/shop?search=${search}`)
+    }
+
+    const dispatch = useDispatch()
+
+    const handleLogout = async () => {
+        const URL = `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/logout`;
+        try{
+            const res = await fetch(URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            const data = await res.json();
+            if(res.ok){
+                console.log(data.message || "Logout Successful");
+                showWarning(data.message || "Logout Successful");
+            }else {
+                showError(data.message || "Login Failed");
+            }
+
+        }catch(err){
+            console.error("Logout Failed:", err);
+        }finally{
+            dispatch(logout())
+            router.push('/')
+        }
     }
 
     return (
@@ -64,7 +92,8 @@ const Navbar = () => {
                         {isAuthenticated && (
                             <button
                                 className="px-8 py-2 bg-red-500 hover:bg-red-600 transition text-white rounded-full"
-                                onClick={() => dispatch(logout())}
+                                // onClick={() => dispatch(logout())}
+                                onClick={() => handleLogout()}
                             >
                                 Logout
                             </button>

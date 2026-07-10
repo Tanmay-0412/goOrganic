@@ -89,7 +89,7 @@ export default function AuthModal({ isOpen, onClose }) {
   if (!isOpen) return null;
   return (
     <div className="fixed inset-0 bg-opacity-40 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8 relative transition-all duration-300">
+       <div className="bg-[#d4d4d4] rounded-2xl shadow-5xl w-full max-w-md p-8 relative transition-all duration-300">
         {/* Close Button */}
         <button
           className="absolute top-3 right-3 text-slate-600 hover:text-slate-800"
