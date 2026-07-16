@@ -1,18 +1,36 @@
 'use client'
-import { Suspense } from 'react'
+import { Suspense, useState } from 'react'
 import Image from 'next/image'
 import ProductCard from '@/components/ProductCard'
 import { useSelector } from 'react-redux'
-import { Users, Leaf, Target, Award, TrendingUp, MapPin, UserCircle, UserCircle2, BookOpen, Globe } from 'lucide-react'
-import { assets } from '@/assets/assets'
+import { Users, Leaf, Target, Award, TrendingUp, MapPin, BookOpen, Globe } from 'lucide-react'
+
+const sectionOptions = [
+    { label: 'Advisor & Expertise', value: 'expertise' },
+    { label: 'Founder Story', value: 'founder' },
+]
 
 function AboutContent() {
+    const [activeSection, setActiveSection] = useState('expertise')
+    const [carouselIndex, setCarouselIndex] = useState(0)
     const products = useSelector(state => state.product.list)
     const featuredProducts = products.slice(0, 6)
+    const carouselItems = featuredProducts.filter(product => product.images?.length)
+    const maxCarouselIndex = Math.max(carouselItems.length - 1, 0)
+    const currentCarousel = carouselItems[carouselIndex] || carouselItems[0]
+
+    const handlePrev = () => {
+        if (!carouselItems.length) return
+        setCarouselIndex((prevIndex) => (prevIndex <= 0 ? maxCarouselIndex : prevIndex - 1))
+    }
+
+    const handleNext = () => {
+        if (!carouselItems.length) return
+        setCarouselIndex((prevIndex) => (prevIndex >= maxCarouselIndex ? 0 : prevIndex + 1))
+    }
 
     return (
         <div className="min-h-screen mx-6">
-            {/* Hero Section */}
             <div className="max-w-7xl mx-auto py-12">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center mb-16">
                     <div>
@@ -20,46 +38,176 @@ function AboutContent() {
                             About <span className="text-green-600">RootVerda</span>
                         </h1>
                         <p className="text-lg text-slate-600 mb-4 leading-relaxed">
-                            RootVerda was established with a simple yet powerful belief — nature has already gifted humanity everything required to create healthy life, balanced ecosystems, and sustainable growth. Pure soil, clean air, abundant water, sunlight, natural minerals, and living energy together create the invisible foundation that supports every form of life around us. Yet in today’s rapidly changing world, both people and nature are slowly losing this balance.
+                            RootVerda was founded on the belief that smart organic farming begins with real expertise and practical, science-backed solutions. We support gardeners, farmers, and communities with trusted products and guidance that honor the balance between people and nature.
                         </p>
-                        {/* <p className="text-lg text-slate-600 leading-relaxed">
-                            Customers spend money on products, but many still fail to understand why their plants remain weak, unhealthy, or unable to grow naturally.
-                        </p> */}
                         <p className="text-lg text-slate-600 leading-relaxed">
-                           This understanding gave birth to RootVerda.
+                            From farming communities to urban gardeners, our mission is to help every customer grow stronger plants, healthier soil, and more resilient ecosystems.
                         </p>
                     </div>
-                    <div className="bg-gradient-to-br from-green-100 to-green-50 rounded-lg p-8 flex items-center justify-center min-h-72">
+                    <div className="bg-gradient-to-br from-green-100 to-green-50 rounded-3xl p-10 flex items-center justify-center min-h-72">
                         <div className="text-center">
                             <Leaf className="w-24 h-24 text-green-600 mx-auto mb-4" />
-                            <p className="text-green-700 font-semibold text-xl">Science Behind Healthy Plants</p>
+                            <p className="text-green-700 font-semibold text-xl">Science, People, and Organic Growth</p>
                         </div>
                     </div>
                 </div>
 
-                {/* Mission & Vision */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 py-8 border-y border-slate-200">
-                    <div className="bg-slate-50 p-8 rounded-lg">
-                        <h3 className="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
-                            <Target className="w-6 h-6 text-green-600" />
-                            Our Mission
-                        </h3>
-                        <p className="text-slate-600 leading-relaxed">
-                            At RootVerda, we recognized a deeper reality. Despite thousands of agricultural and plant-care products available in the market, people continue struggling to keep their plants healthy. Farmers continue working hard but often do not receive the true value of their natural resources. Customers spend money on products, but many still fail to understand why their plants remain weak, unhealthy, or unable to grow naturally.
-                        </p>
+                <div className="mb-12 bg-slate-50 p-6 rounded-3xl shadow-sm border border-slate-200">
+                    <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                        <div>
+                            <p className="text-sm uppercase tracking-[0.3em] text-green-600 font-semibold mb-2">About Us Sections</p>
+                            <h2 className="text-2xl md:text-3xl font-bold text-slate-800">Choose a page to learn more</h2>
+                        </div>
+                        <div className="w-full md:w-auto">
+                            <div className="hidden md:flex gap-3">
+                                {sectionOptions.map((item) => (
+                                    <button
+                                        key={item.value}
+                                        type="button"
+                                        onClick={() => setActiveSection(item.value)}
+                                        className={`rounded-full px-5 py-3 text-sm font-medium transition ${activeSection === item.value ? 'bg-green-600 text-white shadow-md' : 'bg-white text-slate-700 border border-slate-200 hover:border-green-600'}`}>
+                                        {item.label}
+                                    </button>
+                                ))}
+                            </div>
+                            <div className="md:hidden">
+                                <label htmlFor="section" className="sr-only">Select About Section</label>
+                                <select
+                                    id="section"
+                                    value={activeSection}
+                                    onChange={(e) => setActiveSection(e.target.value)}
+                                    className="w-full rounded-3xl border border-slate-300 bg-white px-4 py-3 text-slate-700 shadow-sm"
+                                >
+                                    {sectionOptions.map((item) => (
+                                        <option key={item.value} value={item.value}>{item.label}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        </div>
                     </div>
-                    <div className="bg-slate-50 p-8 rounded-lg">
-                        <h3 className="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
-                            <Users className="w-6 h-6 text-green-600" />
-                            Our Vision
-                        </h3>
-                        <p className="text-slate-600 leading-relaxed">
-                            We are not a company created merely to sell soil, compost, or agricultural products. We are building a long-term ecosystem where science, nature, people, and farming communities work together in complete balance. We believe plants are not decorative objects sitting quietly in balconies or gardens. Plants carry living energy. They improve emotional well-being, purify the air we breathe, create peace within homes, and silently contribute toward healthier lives.
-                        </p>
+
+                    <div className="mt-10">
+                        {activeSection === 'founder' ? (
+                            <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+                                <div className="space-y-6">
+                                    <div className="rounded-3xl bg-white p-8 shadow-sm border border-slate-200">
+                                        <p className="text-sm uppercase tracking-[0.3em] text-green-600 font-semibold mb-3">Founder</p>
+                                        <h3 className="text-3xl font-bold text-slate-800 mb-4">Our Founder is a visionary leader for organic growth.</h3>
+                                        <p className="text-slate-600 leading-relaxed">
+                                            Our founder blends deep agricultural science with a commitment to community-led sustainable farming. The founder's goal is to make organic solutions practical, scalable, and meaningful for both rural farms and urban homes.
+                                        </p>
+                                        <p className="text-slate-600 leading-relaxed mt-4">
+                                            This section showcases real product innovation, hands-on leadership, and a passion for connecting every customer to healthier soil, better harvests, and trusted expert support.
+                                        </p>
+                                    </div>
+                                    <div className="rounded-3xl bg-white p-6 shadow-sm border border-slate-200">
+                                        <div className="relative overflow-hidden rounded-3xl bg-slate-100">
+                                            {currentCarousel ? (
+                                                <Image
+                                                    src={currentCarousel.images[0]}
+                                                    alt={currentCarousel.name}
+                                                    width={1200}
+                                                    height={800}
+                                                    className="w-full max-h-[420px] object-cover"
+                                                />
+                                            ) : (
+                                                <div className="flex h-72 items-center justify-center text-slate-500">Loading product preview...</div>
+                                            )}
+                                        </div>
+                                        <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                                            <div className="text-sm text-slate-500">
+                                                {currentCarousel ? `${currentCarousel.name} — slide ${carouselIndex + 1} of ${carouselItems.length}` : 'No featured images available yet.'}
+                                            </div>
+                                            <div className="flex gap-2">
+                                                <button type="button" onClick={handlePrev} className="rounded-full px-4 py-2 bg-slate-100 text-slate-700 hover:bg-slate-200 transition disabled:cursor-not-allowed disabled:opacity-50" disabled={!carouselItems.length}>
+                                                    Previous
+                                                </button>
+                                                <button type="button" onClick={handleNext} className="rounded-full px-4 py-2 bg-green-600 text-white hover:bg-green-700 transition disabled:cursor-not-allowed disabled:opacity-50" disabled={!carouselItems.length}>
+                                                    Next
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="space-y-6">
+                                    <div className="rounded-3xl bg-white p-8 shadow-sm border border-slate-200">
+                                        <p className="text-sm uppercase tracking-[0.3em] text-green-600 font-semibold mb-3">Founder Video</p>
+                                        <h4 className="text-2xl font-bold text-slate-800 mb-4">A short story behind the brand</h4>
+                                        <div className="aspect-video overflow-hidden rounded-3xl border border-slate-200">
+                                            <iframe
+                                                className="h-full w-full"
+                                                src="https://www.youtube.com/embed/ScMzIvxBSi4"
+                                                title="Founder Story Video"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowFullScreen
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="grid gap-4">
+                                        <div className="rounded-3xl bg-white p-6 shadow-sm border border-slate-200">
+                                            <h5 className="text-xl font-semibold text-slate-800 mb-3">Product-led leadership</h5>
+                                            <p className="text-slate-600 leading-relaxed">Our founder leads with product innovation that blends sustainable ingredients, practical application, and consistent performance across every soil type.</p>
+                                        </div>
+                                        <div className="rounded-3xl bg-white p-6 shadow-sm border border-slate-200">
+                                            <h5 className="text-xl font-semibold text-slate-800 mb-3">Built for modern growers</h5>
+                                            <p className="text-slate-600 leading-relaxed">Every image in the carousel represents a category of products designed to support gardens, farms, and indoor growers with reliable, easy-to-use solutions.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ) : (
+                            <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+                                <div className="space-y-6">
+                                    <div className="rounded-3xl bg-white p-8 shadow-sm border border-slate-200">
+                                        <p className="text-sm uppercase tracking-[0.3em] text-green-600 font-semibold mb-3">Expertise</p>
+                                        <h3 className="text-3xl font-bold text-slate-800 mb-4">Guidance backed by science and experience</h3>
+                                        <p className="text-slate-600 leading-relaxed">
+                                            Our advisor expertise page helps customers understand why our products work, how to use them effectively, and why each choice supports healthier plants. We combine academic research, field experience, and practical plant care advice.
+                                        </p>
+                                    </div>
+                                    <div className="grid gap-4 sm:grid-cols-2">
+                                        <div className="rounded-3xl bg-white p-6 shadow-sm border border-slate-200">
+                                            <h5 className="text-xl font-semibold text-slate-800 mb-3">Science-backed formulas</h5>
+                                            <p className="text-slate-600 leading-relaxed">Every recommendation is supported by soil science and organic farming principles so you can trust the results.</p>
+                                        </div>
+                                        <div className="rounded-3xl bg-white p-6 shadow-sm border border-slate-200">
+                                            <h5 className="text-xl font-semibold text-slate-800 mb-3">Verified field results</h5>
+                                            <p className="text-slate-600 leading-relaxed">Our team works with farm partners to test products in real conditions before we bring them to market.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="space-y-6">
+                                    <div className="rounded-3xl bg-white p-8 shadow-sm border border-slate-200">
+                                        <h4 className="text-2xl font-bold text-slate-800 mb-4">How expertise helps you</h4>
+                                        <ul className="space-y-4 text-slate-600">
+                                            <li className="flex gap-3">
+                                                <span className="mt-1 inline-flex h-8 w-8 items-center justify-center rounded-full bg-green-600 text-white font-semibold">1</span>
+                                                <span>Understand product benefits clearly, from soil health to plant strength.</span>
+                                            </li>
+                                            <li className="flex gap-3">
+                                                <span className="mt-1 inline-flex h-8 w-8 items-center justify-center rounded-full bg-green-600 text-white font-semibold">2</span>
+                                                <span>Get practical application tips that reduce waste and maximize results.</span>
+                                            </li>
+                                            <li className="flex gap-3">
+                                                <span className="mt-1 inline-flex h-8 w-8 items-center justify-center rounded-full bg-green-600 text-white font-semibold">3</span>
+                                                <span>Gain confidence with advice that’s field-tested and farmer-approved.</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div className="rounded-3xl bg-white p-6 shadow-sm border border-slate-200">
+                                        <h5 className="text-xl font-semibold text-slate-800 mb-3">Expert backing</h5>
+                                        <div className="space-y-3 text-slate-600">
+                                            <p>• Research from soil science and organic farming best practices.</p>
+                                            <p>• Direct feedback from growers and specialist advisors.</p>
+                                            <p>• Easy-to-follow guidance for both new and experienced growers.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
 
-                {/* Who We Are */}
                 <div className="mb-16">
                     <h2 className="text-3xl font-bold text-slate-800 mb-8 flex items-center gap-2">
                         <Users className="w-8 h-8 text-green-600" />
@@ -82,57 +230,54 @@ function AboutContent() {
                 </div>
 
                 <div className="mb-16 bg-gradient-to-r from-green-50 to-slate-50 p-10 rounded-lg">
-                <h2 className="text-3xl font-bold text-slate-800 mb-8 flex items-center gap-2">
-                    <Leaf className="w-8 h-8 text-green-600" />
-                    Meet Our Organic Farming Specialist
-                </h2>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {/* Specialist Card */}
-                    <div className="group bg-white shadow-lg rounded-xl overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl">
-                    <img 
-                        src="http://kvksindhudurg.com/wp-content/uploads/2024/06/vys-150x150.jpg"
-                        alt="Organic Farming Specialist" 
-                        className="w-full h-80 object-cover group-hover:opacity-90 transition duration-300"
-                    />
-                    <div className="p-6 text-center">
-                        <h3 className="text-xl font-bold text-slate-800 mb-2">Dr. Vilas Yashwant Sawant</h3>
-                        <p className="text-slate-600 mb-4">Subject Matter Specialist</p>
-                        <p className="text-slate-600 mb-4">Discipline: Extension Education</p>
-                        <div className="flex justify-center gap-4">
-                        <span className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium group-hover:bg-green-200 transition">
-                            15+ Years Experience
-                        </span>
-                        <span className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium group-hover:bg-green-200 transition">
-                            Global Recognition
-                        </span>
+                    <h2 className="text-3xl font-bold text-slate-800 mb-8 flex items-center gap-2">
+                        <Leaf className="w-8 h-8 text-green-600" />
+                        Meet Our Organic Farming Specialist
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div className="group bg-white shadow-lg rounded-xl overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+                            <img
+                                src="http://kvksindhudurg.com/wp-content/uploads/2024/06/vys-150x150.jpg"
+                                alt="Organic Farming Specialist"
+                                className="w-full h-80 object-cover group-hover:opacity-90 transition duration-300"
+                            />
+                            <div className="p-6 text-center">
+                                <h3 className="text-xl font-bold text-slate-800 mb-2">Dr. Vilas Yashwant Sawant</h3>
+                                <p className="text-slate-600 mb-4">Subject Matter Specialist</p>
+                                <p className="text-slate-600 mb-4">Discipline: Extension Education</p>
+                                <div className="flex justify-center gap-4">
+                                    <span className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium group-hover:bg-green-200 transition">
+                                        15+ Years Experience
+                                    </span>
+                                    <span className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium group-hover:bg-green-200 transition">
+                                        Global Recognition
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="group bg-white shadow-lg rounded-xl overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+                            <img
+                                src="http://kvksindhudurg.com/wp-content/uploads/2024/06/vys-150x150.jpg"
+                                alt="Organic Farming Specialist"
+                                className="w-full h-80 object-cover group-hover:opacity-90 transition duration-300"
+                            />
+                            <div className="p-6 text-center">
+                                <h3 className="text-xl font-bold text-slate-800 mb-2">Dr. Vilas Yashwant Sawant</h3>
+                                <p className="text-slate-600 mb-4">Subject Matter Specialist</p>
+                                <p className="text-slate-600 mb-4">Discipline: Extension Education</p>
+                                <div className="flex justify-center gap-4">
+                                    <span className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium group-hover:bg-green-200 transition">
+                                        15+ Years Experience
+                                    </span>
+                                    <span className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium group-hover:bg-green-200 transition">
+                                        Global Recognition
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    </div>
-                    <div className="group bg-white shadow-lg rounded-xl overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl">
-                    <img 
-                        src="http://kvksindhudurg.com/wp-content/uploads/2024/06/vys-150x150.jpg"
-                        alt="Organic Farming Specialist" 
-                        className="w-full h-80 object-cover group-hover:opacity-90 transition duration-300"
-                    />
-                    <div className="p-6 text-center">
-                        <h3 className="text-xl font-bold text-slate-800 mb-2">Dr. Vilas Yashwant Sawant</h3>
-                        <p className="text-slate-600 mb-4">Subject Matter Specialist</p>
-                        <p className="text-slate-600 mb-4">Discipline: Extension Education</p>
-                        <div className="flex justify-center gap-4">
-                        <span className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium group-hover:bg-green-200 transition">
-                            15+ Years Experience
-                        </span>
-                        <span className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium group-hover:bg-green-200 transition">
-                            Global Recognition
-                        </span>
-                        </div>
-                    </div>
-                    </div>
-                </div>
                 </div>
 
-                {/* Experience & Achievements */}
                 <div className="mb-16 bg-gradient-to-r from-green-50 to-slate-50 p-10 rounded-lg">
                     <h2 className="text-3xl font-bold text-slate-800 mb-8 flex items-center gap-2">
                         <Award className="w-8 h-8 text-green-600" />
@@ -170,7 +315,6 @@ function AboutContent() {
                     </div>
                 </div>
 
-                {/* Work Implemented */}
                 <div className="mb-16">
                     <h2 className="text-3xl font-bold text-slate-800 mb-8">Work Implemented</h2>
                     <div className="space-y-6">
@@ -212,7 +356,6 @@ function AboutContent() {
                     </div>
                 </div>
 
-                {/* Featured Products */}
                 <div className="mb-16">
                     <h2 className="text-3xl font-bold text-slate-800 mb-8">Our Featured Products</h2>
                     <div className="grid grid-cols-2 sm:flex flex-wrap gap-6 xl:gap-12">
@@ -222,7 +365,6 @@ function AboutContent() {
                     </div>
                 </div>
 
-                {/* Why Choose Us */}
                 <div className="mb-16 bg-slate-50 p-10 rounded-lg">
                     <h2 className="text-3xl font-bold text-slate-800 mb-8">Why Choose RootVerda?</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -271,7 +413,6 @@ function AboutContent() {
                     </div>
                 </div>
 
-                {/* Recommended Sites */}
                 <div className="mb-16">
                     <h2 className="text-3xl font-bold text-slate-800 mb-8">Recommended Resources</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -294,8 +435,7 @@ function AboutContent() {
                     </div>
                 </div>
 
-                {/* Call to Action */}
-                <div className="bg-gradient-to-r from-green-600 to-green-700 text-white p-12 rounded-lg text-center mb-16">
+                <div className="bg-gradient-to-r from-green-600 to-green-700 text-white p-12 rounded-3xl text-center mb-16">
                     <h2 className="text-3xl font-bold mb-4">Join Our Growing Community</h2>
                     <p className="text-lg mb-6 max-w-2xl mx-auto">
                         Whether you're a rural farmer or an urban gardener, there's a place for you in the goOrganic community. Start your organic journey today!
