@@ -5,7 +5,7 @@ import { MoveLeftIcon } from "lucide-react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useSelector } from "react-redux"
 
-function GardeningAccessoriesContent() {
+function ProductsContent() {
 
     // get query params ?search=abc
     const searchParams = useSearchParams()
@@ -51,7 +51,7 @@ function GardeningAccessoriesContent() {
                 {/* Filter and Search Section */}
                 <div className="mb-8 flex items-center justify-between flex-wrap gap-4">
                     <div>
-                        <h2 onClick={() => router.push('/gardening-accessories')} className="text-2xl text-slate-500 flex items-center gap-2 cursor-pointer hover:text-slate-700 transition">
+                        <h2 onClick={() => router.push('/products')} className="text-2xl text-slate-500 flex items-center gap-2 cursor-pointer hover:text-slate-700 transition">
                             {search && <MoveLeftIcon size={20} />}
                             <span className="text-slate-700 font-medium">
                                 {search ? `Search Results for "${search}"` : "All Accessories"}
@@ -73,7 +73,7 @@ function GardeningAccessoriesContent() {
                         <div className="text-center">
                             <p className="text-xl text-slate-600 mb-4">No accessories found</p>
                             <button
-                                onClick={() => router.push('/gardening-accessories')}
+                                onClick={() => router.push('/products')}
                                 className="text-green-600 hover:text-green-700 font-semibold transition"
                             >
                                 View all accessories
@@ -140,10 +140,10 @@ function GardeningAccessoriesContent() {
     )
 }
 
-export default function GardeningAccessories() {
+export default function Products() {
     return (
         <Suspense fallback={<div>Loading gardening accessories...</div>}>
-            <GardeningAccessoriesContent />
+            <ProductsContent />
         </Suspense>
     )
 }

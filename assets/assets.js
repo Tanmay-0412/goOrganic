@@ -19,7 +19,7 @@ import product_img12 from "./product_img12.png"
 import product_img13 from "./product_img13.png"
 import product_img14 from "./product_img14.png"
 import product_img15 from "./product_img15.png"
-import product_img16 from "./product_img16.jpeg"
+import product_img16 from "./product_img16.jpg"
 import { ClockFadingIcon, HeadsetIcon, SendIcon } from "lucide-react";
 import profile_pic1 from "./profile_pic1.jpg"
 import profile_pic2 from "./profile_pic2.jpg"

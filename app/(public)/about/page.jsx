@@ -1,5 +1,5 @@
 'use client'
-import { Suspense, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import Image from 'next/image'
 import ProductCard from '@/components/ProductCard'
 import { useSelector } from 'react-redux'
@@ -29,6 +29,16 @@ function AboutContent() {
         setCarouselIndex((prevIndex) => (prevIndex >= maxCarouselIndex ? 0 : prevIndex + 1))
     }
 
+    useEffect(() => {
+        if (!carouselItems.length) return
+
+        const intervalId = setInterval(() => {
+            setCarouselIndex((prevIndex) => (prevIndex >= maxCarouselIndex ? 0 : prevIndex + 1))
+        }, 3000)
+
+        return () => clearInterval(intervalId)
+    }, [carouselItems.length, maxCarouselIndex])
+
     return (
         <div className="min-h-screen mx-6">
             <div className="max-w-7xl mx-auto py-12">
@@ -56,7 +66,7 @@ function AboutContent() {
                     <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                         <div>
                             <p className="text-sm uppercase tracking-[0.3em] text-green-600 font-semibold mb-2">About Us Sections</p>
-                            <h2 className="text-2xl md:text-3xl font-bold text-slate-800">Choose a page to learn more</h2>
+                            <h2 className="text-2xl md:text-3xl font-bold text-slate-800">We Are Always Connected With Nature — And With You</h2>
                         </div>
                         <div className="w-full md:w-auto">
                             <div className="hidden md:flex gap-3">
@@ -94,7 +104,7 @@ function AboutContent() {
                                         <p className="text-sm uppercase tracking-[0.3em] text-green-600 font-semibold mb-3">Founder</p>
                                         <h3 className="text-3xl font-bold text-slate-800 mb-4">Our Founder is a visionary leader for organic growth.</h3>
                                         <p className="text-slate-600 leading-relaxed">
-                                            Our founder blends deep agricultural science with a commitment to community-led sustainable farming. The founder's goal is to make organic solutions practical, scalable, and meaningful for both rural farms and urban homes.
+                                           At RootVerda, every customer relationship begins with trust and continues through genuine support, honest communication, and our commitment to helping both people and plants grow healthier together.Whether you are a home gardener caring deeply for your balcony plants, a nature lover building greener spaces around your family, a farmer looking to understand the larger value of natural agricultural products, or someone simply seeking honest guidance for healthier plant growth — we are always ready to listen.
                                         </p>
                                         <p className="text-slate-600 leading-relaxed mt-4">
                                             This section showcases real product innovation, hands-on leadership, and a passion for connecting every customer to healthier soil, better harvests, and trusted expert support.
@@ -146,33 +156,58 @@ function AboutContent() {
                                     <div className="grid gap-4">
                                         <div className="rounded-3xl bg-white p-6 shadow-sm border border-slate-200">
                                             <h5 className="text-xl font-semibold text-slate-800 mb-3">Product-led leadership</h5>
-                                            <p className="text-slate-600 leading-relaxed">Our founder leads with product innovation that blends sustainable ingredients, practical application, and consistent performance across every soil type.</p>
+                                            <p className="text-slate-600 leading-relaxed">We believe that every question deserves attention because behind every plant stands a person who genuinely cares about life, growth, and the beauty that nature quietly creates around us.Our team remains available to help customers understand product suitability, discuss plant health concerns, provide guidance related to natural agricultural products, and assist with product selection based on your individual plant care requirements.</p>
                                         </div>
                                         <div className="rounded-3xl bg-white p-6 shadow-sm border border-slate-200">
                                             <h5 className="text-xl font-semibold text-slate-800 mb-3">Built for modern growers</h5>
-                                            <p className="text-slate-600 leading-relaxed">Every image in the carousel represents a category of products designed to support gardens, farms, and indoor growers with reliable, easy-to-use solutions.</p>
+                                            <p className="text-slate-600 leading-relaxed">For local sourcing operations, farmer coordination, and product collection activities from the Konkan region, our ground operations are supported through our local network managed from Sindhudurg by our operational representative Rupesh Sawant, who helps us stay closely connected with local agricultural communities and regional product sourcing activities.</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         ) : (
+                            <>
+                             <div className="mb-16 bg-gradient-to-r from-green-50 to-slate-50 p-10 rounded-lg">
+                    <h2 className="text-3xl font-bold text-slate-800 mb-8 flex items-center gap-2">
+                        <Leaf className="w-8 h-8 text-green-600" />
+                        Meet Our Organic Farming Specialist
+                    </h2>
+                    <div className="flex justify-center">
+                        <div className="group w-full max-w-2xl bg-white shadow-lg rounded-xl overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+                            <img
+                                src="http://kvksindhudurg.com/wp-content/uploads/2024/06/vys-150x150.jpg"
+                                alt="Organic Farming Specialist"
+                                className="w-100 h-100 object-cover group-hover:opacity-90 transition duration-300 justify-center items-center mx-auto "
+                            />
+                            <div className="p-6 text-center">
+                                <h3 className="text-xl font-bold text-slate-800 mb-2">Dr. Vilas Yashwant Sawant</h3>
+                                <p className="text-slate-600 mb-4">Subject Matter Specialist</p>
+                                <p className="text-slate-600 mb-4">Discipline: Extension Education</p>
+                                <div className="flex justify-center gap-4">
+                                    <span className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium group-hover:bg-green-200 transition">
+                                        15+ Years Experience
+                                    </span>
+                                    <span className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium group-hover:bg-green-200 transition">
+                                        Global Recognition
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                             <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
                                 <div className="space-y-6">
                                     <div className="rounded-3xl bg-white p-8 shadow-sm border border-slate-200">
                                         <p className="text-sm uppercase tracking-[0.3em] text-green-600 font-semibold mb-3">Expertise</p>
-                                        <h3 className="text-3xl font-bold text-slate-800 mb-4">Guidance backed by science and experience</h3>
+                                        <h3 className="text-3xl font-bold text-slate-800 mb-4">Guidance backed by experience</h3>
                                         <p className="text-slate-600 leading-relaxed">
-                                            Our advisor expertise page helps customers understand why our products work, how to use them effectively, and why each choice supports healthier plants. We combine academic research, field experience, and practical plant care advice.
+                                           Dr. Vilas Sawant is recognized for his work as a Subject Matter Specialist in Extension Education, actively participating in field-based agricultural research activities focused on improving farming practices under real-world conditions. His expertise includes on-farm testing programs where agricultural technologies are tested directly on farmers’ fields to evaluate their effectiveness under different soil types, climatic conditions, local farming systems, and regional agricultural environments.
                                         </p>
                                     </div>
-                                    <div className="grid gap-4 sm:grid-cols-2">
+                                    <div className="grid gap-4 sm:grid-cols-1">
                                         <div className="rounded-3xl bg-white p-6 shadow-sm border border-slate-200">
                                             <h5 className="text-xl font-semibold text-slate-800 mb-3">Science-backed formulas</h5>
-                                            <p className="text-slate-600 leading-relaxed">Every recommendation is supported by soil science and organic farming principles so you can trust the results.</p>
-                                        </div>
-                                        <div className="rounded-3xl bg-white p-6 shadow-sm border border-slate-200">
-                                            <h5 className="text-xl font-semibold text-slate-800 mb-3">Verified field results</h5>
-                                            <p className="text-slate-600 leading-relaxed">Our team works with farm partners to test products in real conditions before we bring them to market.</p>
+                                            <p className="text-slate-600 leading-relaxed">His work follows a highly practical scientific approach where technologies developed through agricultural universities and research institutes are tested, refined, modified where necessary, and then implemented for wider adoption after successful evaluation.For more than five years, continuous discussions around agriculture, natural farming opportunities, soil science, sustainable farming practices, and long-term agricultural business development gradually shaped the early vision of RootVerda.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -204,6 +239,7 @@ function AboutContent() {
                                     </div>
                                 </div>
                             </div>
+                            </>
                         )}
                     </div>
                 </div>
@@ -229,54 +265,7 @@ function AboutContent() {
                     </div>
                 </div>
 
-                <div className="mb-16 bg-gradient-to-r from-green-50 to-slate-50 p-10 rounded-lg">
-                    <h2 className="text-3xl font-bold text-slate-800 mb-8 flex items-center gap-2">
-                        <Leaf className="w-8 h-8 text-green-600" />
-                        Meet Our Organic Farming Specialist
-                    </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <div className="group bg-white shadow-lg rounded-xl overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl">
-                            <img
-                                src="http://kvksindhudurg.com/wp-content/uploads/2024/06/vys-150x150.jpg"
-                                alt="Organic Farming Specialist"
-                                className="w-full h-80 object-cover group-hover:opacity-90 transition duration-300"
-                            />
-                            <div className="p-6 text-center">
-                                <h3 className="text-xl font-bold text-slate-800 mb-2">Dr. Vilas Yashwant Sawant</h3>
-                                <p className="text-slate-600 mb-4">Subject Matter Specialist</p>
-                                <p className="text-slate-600 mb-4">Discipline: Extension Education</p>
-                                <div className="flex justify-center gap-4">
-                                    <span className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium group-hover:bg-green-200 transition">
-                                        15+ Years Experience
-                                    </span>
-                                    <span className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium group-hover:bg-green-200 transition">
-                                        Global Recognition
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="group bg-white shadow-lg rounded-xl overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl">
-                            <img
-                                src="http://kvksindhudurg.com/wp-content/uploads/2024/06/vys-150x150.jpg"
-                                alt="Organic Farming Specialist"
-                                className="w-full h-80 object-cover group-hover:opacity-90 transition duration-300"
-                            />
-                            <div className="p-6 text-center">
-                                <h3 className="text-xl font-bold text-slate-800 mb-2">Dr. Vilas Yashwant Sawant</h3>
-                                <p className="text-slate-600 mb-4">Subject Matter Specialist</p>
-                                <p className="text-slate-600 mb-4">Discipline: Extension Education</p>
-                                <div className="flex justify-center gap-4">
-                                    <span className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium group-hover:bg-green-200 transition">
-                                        15+ Years Experience
-                                    </span>
-                                    <span className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium group-hover:bg-green-200 transition">
-                                        Global Recognition
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+               
 
                 <div className="mb-16 bg-gradient-to-r from-green-50 to-slate-50 p-10 rounded-lg">
                     <h2 className="text-3xl font-bold text-slate-800 mb-8 flex items-center gap-2">

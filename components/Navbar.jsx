@@ -71,7 +71,7 @@ const Navbar = () => {
                         <Link href="/">Home</Link>
                         <Link href="/shop">Shop</Link>
                         <Link href="/about">About</Link>
-                        <Link href="/gardening-accessories">Products</Link>
+                        <Link href="/products">Products</Link>
 
                         <form onSubmit={handleSearch} className="hidden xl:flex items-center w-xs text-sm gap-2 bg-slate-100 px-4 py-3 rounded-full">
                             <Search size={18} className="text-slate-600" />
@@ -139,7 +139,7 @@ const Navbar = () => {
                         <Link href="/" onClick={() => setSidebarOpen(false)} className="block rounded-2xl border border-slate-200 px-4 py-3 text-slate-800 hover:bg-slate-50">Home</Link>
                         <Link href="/shop" onClick={() => setSidebarOpen(false)} className="block rounded-2xl border border-slate-200 px-4 py-3 text-slate-800 hover:bg-slate-50">Shop</Link>
                         <Link href="/about" onClick={() => setSidebarOpen(false)} className="block rounded-2xl border border-slate-200 px-4 py-3 text-slate-800 hover:bg-slate-50">About</Link>
-                        <Link href="/gardening-accessories" onClick={() => setSidebarOpen(false)} className="block rounded-2xl border border-slate-200 px-4 py-3 text-slate-800 hover:bg-slate-50">Products</Link>
+                        <Link href="/products" onClick={() => setSidebarOpen(false)} className="block rounded-2xl border border-slate-200 px-4 py-3 text-slate-800 hover:bg-slate-50">Products</Link>
                         <Link href="/cart" onClick={() => setSidebarOpen(false)} className="block rounded-2xl border border-slate-200 px-4 py-3 text-slate-800 hover:bg-slate-50">Cart</Link>
                     </nav>
 
